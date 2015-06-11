@@ -1,6 +1,6 @@
 #ifndef __CINT__
 
-#include "PPi0Example.h"
+#include "PPi0Sam.h"
 #include <time.h>
 
 using namespace std;
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     start = clock();
 
     // Create instance of analysis class
-    PPi0Example* analysis = new PPi0Example;
+    PPi0Sam* analysis = new PPi0Sam;
 
     // Perform basic configuration
     if(!analysis->BaseConfig(argc, argv, "GoAT", "Physics"))

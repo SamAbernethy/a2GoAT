@@ -1,6 +1,6 @@
-#include "PPi0Example.h"
+#include "PPi0Sam.h"
 
-PPi0Example::PPi0Example()
+PPi0Sam::PPi0Sam()
 {
 
     time 	= new GH1("time", 	"time", 	1400, -700, 700);
@@ -32,11 +32,11 @@ PPi0Example::PPi0Example()
     TaggerAccScal = new TH1D("TaggerAccScal","TaggerAccScal",352,0,352);
 }
 
-PPi0Example::~PPi0Example()
+PPi0Sam::~PPi0Sam()
 {
 }
 
-Bool_t	PPi0Example::Init()
+Bool_t	PPi0Sam::Init()
 {
     cout << "Initialising physics analysis..." << endl;
     cout << "--------------------------------------------------" << endl << endl;
@@ -49,7 +49,7 @@ Bool_t	PPi0Example::Init()
     return kTRUE;
 }
 
-Bool_t	PPi0Example::Start()
+Bool_t	PPi0Sam::Start()
 {
     if(!IsGoATFile())
     {
@@ -63,7 +63,7 @@ Bool_t	PPi0Example::Start()
     return kTRUE;
 }
 
-void	PPi0Example::ProcessEvent()
+void	PPi0Sam::ProcessEvent()
 {
     // fill time diff (tagger - pi0), all pi0
     FillTime(*GetNeutralPions(),time);
@@ -110,13 +110,13 @@ void	PPi0Example::ProcessEvent()
     }
 }
 
-void	PPi0Example::ProcessScalerRead()
+void	PPi0Sam::ProcessScalerRead()
 {
     // Fill Tagger Scalers
     FillScalers(GetTC_scaler_min(),GetTC_scaler_max(),TaggerAccScal);
 }
 
-Bool_t	PPi0Example::Write()
+Bool_t	PPi0Sam::Write()
 {
     // Write all GH1's and TObjects defined in this class
     RandomSubtraction(Theta_1_prompt, Theta_1_random, Theta_1, 0.122); // works for now but should be moved

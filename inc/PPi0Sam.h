@@ -1,5 +1,5 @@
-#ifndef __PPi0Example_h__
-#define __PPi0Example_h__
+#ifndef __PPi0Sam_h__
+#define __PPi0Sam_h__
 
 #include <iostream>
 #include <fstream>
@@ -7,9 +7,9 @@
 #include <string>
 
 #include "GTreeManager.h"
-#include "PPhysics.h"
+#include "PPhysicsSam.h"
 
-class	PPi0Example  : public PPhysics
+class	PPi0Sam  : public PPhysicsSam
 {
 private:
     // numbers made by Dylan
@@ -80,8 +80,8 @@ protected:
     virtual Bool_t    Write();
 
 public:
-    PPi0Example();
-    virtual ~PPi0Example();
+    PPi0Sam();
+    virtual ~PPi0Sam();
     virtual Bool_t  Init();
 
 };

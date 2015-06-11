@@ -1,5 +1,5 @@
-#ifndef __PPhysics_h__
-#define __PPhysics_h__
+#ifndef __PPhysicsSam_h__
+#define __PPhysicsSam_h__
 
 #include <iostream>
 #include <fstream>
@@ -12,7 +12,7 @@
 #include "GTreeTagger.h"
 
 
-class	PPhysics : virtual public GTreeManager
+class	PPhysicsSam : virtual public GTreeManager
 {
 private:
 
@@ -46,8 +46,8 @@ protected:
 
 
 public:
-    PPhysics();
-    virtual ~PPhysics();
+    PPhysicsSam();
+    virtual ~PPhysicsSam();
 
     virtual Bool_t	Init();
     virtual void	Analyse() {;}

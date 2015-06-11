@@ -1,30 +1,30 @@
 #ifndef __CINT__
 
-#include "PPhysics.h"
+#include "PPhysicsSam.h"
 
-PPhysics::PPhysics()
+PPhysicsSam::PPhysicsSam()
 {
     TC_cut_min = 0;
     TC_cut_max = 352;
 }
 
-PPhysics::~PPhysics()
+PPhysicsSam::~PPhysicsSam()
 {
 }
 
-Bool_t	PPhysics::Init()
+Bool_t	PPhysicsSam::Init()
 {
     return kTRUE;
 }
 
-void	PPhysics::Reconstruct()
+void	PPhysicsSam::Reconstruct()
 {
 }
 
 // ----------------------------------------------------------------------------------------
 // TH1 routines
 // ----------------------------------------------------------------------------------------
-void PPhysics::FillScalers(Int_t low_scaler_number, Int_t high_scaler_number, TH1* hist)
+void PPhysicsSam::FillScalers(Int_t low_scaler_number, Int_t high_scaler_number, TH1* hist)
 {
     Int_t nFillScalers = high_scaler_number - low_scaler_number + 1;
 
@@ -63,7 +63,7 @@ void PPhysics::FillScalers(Int_t low_scaler_number, Int_t high_scaler_number, TH
     hist->Add(hist_current_SR);
 }
 
-void PPhysics::FillMissingMass(const GTreeParticle& tree, TH1* Hprompt, TH1* Hrandom)
+void PPhysicsSam::FillMissingMass(const GTreeParticle& tree, TH1* Hprompt, TH1* Hrandom)
 {
     for (Int_t i = 0; i < tree.GetNParticles(); i++)
     {
@@ -74,7 +74,7 @@ void PPhysics::FillMissingMass(const GTreeParticle& tree, TH1* Hprompt, TH1* Hra
     }
 }
 
-void PPhysics::FillMissingMass(const GTreeParticle& tree, Int_t particle_index, TH1* Hprompt, TH1* Hrandom)
+void PPhysicsSam::FillMissingMass(const GTreeParticle& tree, Int_t particle_index, TH1* Hprompt, TH1* Hrandom)
 {
     for (Int_t i = 0; i < GetTagger()->GetNTagged(); i++)
     {
@@ -82,7 +82,7 @@ void PPhysics::FillMissingMass(const GTreeParticle& tree, Int_t particle_index, 
     }
 }
 
-void PPhysics::FillMissingMass(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, TH1* Hprompt, TH1* Hrandom)
+void PPhysicsSam::FillMissingMass(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, TH1* Hprompt, TH1* Hrandom)
 {
     time = GetTagger()->GetTaggedTime(tagger_index) - tree.GetTime(particle_index);
     missingp4 = CalcMissingP4(tree, particle_index,tagger_index);
@@ -91,7 +91,7 @@ void PPhysics::FillMissingMass(const GTreeParticle& tree, Int_t particle_index, 
     if (GHistBGSub::IsRandom(time)) Hrandom->Fill(missingp4.M());
 }
 
-void PPhysics::FillTime(const GTreeParticle& tree, TH1* Hist)
+void PPhysicsSam::FillTime(const GTreeParticle& tree, TH1* Hist)
 {
     for (Int_t i = 0; i < tree.GetNParticles(); i++)
     {
@@ -107,7 +107,7 @@ void PPhysics::FillTime(const GTreeParticle& tree, TH1* Hist)
     }
 }
 // ADDED BY DYLAN, contains FillThetaPair
-Bool_t	PPhysics::FillTheta(const GTreeParticle& tree, Int_t particle_index, TH1* Tprompt, TH1* Trandom)
+Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, TH1* Tprompt, TH1* Trandom)
 {
     for (Int_t q = 0; q < GetTagger() -> GetNTagged(); q++) // q goes from 0 to NTagged
     {
@@ -125,14 +125,14 @@ Bool_t	PPhysics::FillTheta(const GTreeParticle& tree, Int_t particle_index, TH1*
 }
 
 // ADDED BY ME
-void PPhysics::RandomSubtraction(TH1* Tprompt, TH1* Trandom, TH1* sub, Double_t ratio)
+void PPhysicsSam::RandomSubtraction(TH1* Tprompt, TH1* Trandom, TH1* sub, Double_t ratio)
 {
     sub->Add(Tprompt,1);
     sub->Add(Trandom,-ratio);
 }
 
 // ADDED BY DYLAN
-Bool_t PPhysics::FillThetaPair(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index,TH1* Tprompt, TH1* Trandom)
+Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index,TH1* Tprompt, TH1* Trandom)
 {
     time = GetTagger()->GetTaggedTime(tagger_index) - tree.GetTime(particle_index);
 
@@ -157,7 +157,7 @@ Bool_t PPhysics::FillThetaPair(const GTreeParticle& tree, Int_t particle_index, 
     return kTRUE;
 }
 
-void PPhysics::FillTime(const GTreeParticle& tree, Int_t particle_index, TH1* Hist)
+void PPhysicsSam::FillTime(const GTreeParticle& tree, Int_t particle_index, TH1* Hist)
 {
     for (Int_t j = 0; j < GetTagger()->GetNTagged(); j++)
     {
@@ -170,7 +170,7 @@ void PPhysics::FillTime(const GTreeParticle& tree, Int_t particle_index, TH1* Hi
     }
 }
 
-void PPhysics::FillTimeCut(const GTreeParticle& tree, TH1* Hist)
+void PPhysicsSam::FillTimeCut(const GTreeParticle& tree, TH1* Hist)
 {
     for (Int_t i = 0; i < tree.GetNParticles(); i++)
     {
@@ -186,7 +186,7 @@ void PPhysics::FillTimeCut(const GTreeParticle& tree, TH1* Hist)
     }
 }
 
-void PPhysics::FillTimeCut(const GTreeParticle& tree, Int_t particle_index, TH1* Hist)
+void PPhysicsSam::FillTimeCut(const GTreeParticle& tree, Int_t particle_index, TH1* Hist)
 {
     for (Int_t j = 0; j < GetTagger()->GetNTagged(); j++)
     {
@@ -199,7 +199,7 @@ void PPhysics::FillTimeCut(const GTreeParticle& tree, Int_t particle_index, TH1*
     }
 }
 
-void PPhysics::FillMass(const GTreeParticle& tree, TH1* Hist)
+void PPhysicsSam::FillMass(const GTreeParticle& tree, TH1* Hist)
 {
     for (Int_t i = 0; i < tree.GetNParticles(); i++)
     {
@@ -207,12 +207,12 @@ void PPhysics::FillMass(const GTreeParticle& tree, TH1* Hist)
     }
 }
 
-void PPhysics::FillMass(const GTreeParticle& tree, Int_t particle_index, TH1* Hist)
+void PPhysicsSam::FillMass(const GTreeParticle& tree, Int_t particle_index, TH1* Hist)
 {
     Hist->Fill(tree.GetMass(particle_index));
 }
 
-void PPhysics::FillBeamAsymmetry(const GTreeParticle& tree, Int_t particle_index, TH1* Hprompt, TH1* Hrandom, Double_t MM_min, Double_t MM_max)
+void PPhysicsSam::FillBeamAsymmetry(const GTreeParticle& tree, Int_t particle_index, TH1* Hprompt, TH1* Hrandom, Double_t MM_min, Double_t MM_max)
 {
     for (Int_t i = 0; i < GetTagger()->GetNTagged(); i++)
     {
@@ -221,7 +221,7 @@ void PPhysics::FillBeamAsymmetry(const GTreeParticle& tree, Int_t particle_index
 
 }
 
-void PPhysics::FillBeamAsymmetry(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, TH1* Hprompt, TH1* Hrandom, Double_t MM_min, Double_t MM_max)
+void PPhysicsSam::FillBeamAsymmetry(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, TH1* Hprompt, TH1* Hrandom, Double_t MM_min, Double_t MM_max)
 {
     // Is tagger channel rejected by user?
 //    cout << tagger->GetTaggedChannel(tagger_index) << " " << TC_cut_min << " " << TC_cut_max << endl;
@@ -240,7 +240,7 @@ void PPhysics::FillBeamAsymmetry(const GTreeParticle& tree, Int_t particle_index
    if (GHistBGSub::IsRandom(time)) Hrandom->Fill(tree.GetPhi(particle_index));	//cout << "random" << endl;}
 }
 
-Double_t PPhysics::CalcCoplanarity(const GTreeParticle& tree1, Int_t particle_index1, const GTreeParticle& tree2, Int_t particle_index2)
+Double_t PPhysicsSam::CalcCoplanarity(const GTreeParticle& tree1, Int_t particle_index1, const GTreeParticle& tree2, Int_t particle_index2)
 {
    Double_t phi1 = tree1.GetPhi(particle_index1);
    Double_t phi2 = tree2.GetPhi(particle_index2);
@@ -253,7 +253,7 @@ Double_t PPhysics::CalcCoplanarity(const GTreeParticle& tree1, Int_t particle_in
 // GH1 routines
 // ----------------------------------------------------------------------------------------
 
-void PPhysics::FillMissingMass(const GTreeParticle& tree, GH1* gHist, Bool_t TaggerBinning)
+void PPhysicsSam::FillMissingMass(const GTreeParticle& tree, GH1* gHist, Bool_t TaggerBinning)
 {
     for (Int_t i = 0; i < tree.GetNParticles(); i++)
     {
@@ -264,7 +264,7 @@ void PPhysics::FillMissingMass(const GTreeParticle& tree, GH1* gHist, Bool_t Tag
     }
 }
 
-void PPhysics::FillMissingMass(const GTreeParticle& tree, Int_t particle_index, GH1* gHist, Bool_t TaggerBinning)
+void PPhysicsSam::FillMissingMass(const GTreeParticle& tree, Int_t particle_index, GH1* gHist, Bool_t TaggerBinning)
 {
     for (Int_t i = 0; i < GetTagger()->GetNTagged(); i++)
     {
@@ -272,7 +272,7 @@ void PPhysics::FillMissingMass(const GTreeParticle& tree, Int_t particle_index, 
     }
 }
 
-void PPhysics::FillMissingMass(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, GH1* gHist, Bool_t TaggerBinning)
+void PPhysicsSam::FillMissingMass(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, GH1* gHist, Bool_t TaggerBinning)
 {
     // Is tagger channel rejected by user?
     if(GetTagger()->GetTaggedChannel(tagger_index) < TC_cut_min) return;
@@ -290,21 +290,21 @@ void PPhysics::FillMissingMass(const GTreeParticle& tree, Int_t particle_index, 
 
 }
 
-Double_t PPhysics::CalcMissingMass(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index)
+Double_t PPhysicsSam::CalcMissingMass(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index)
 {
     missingp4 	= CalcMissingP4(tree, particle_index, tagger_index);
 
     return missingp4.M();
 }
 
-Double_t PPhysics::CalcMissingEnergy(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index)
+Double_t PPhysicsSam::CalcMissingEnergy(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index)
 {
     missingp4 	= CalcMissingP4(tree,particle_index, tagger_index);
 
     return missingp4.T();
 }
 
-TLorentzVector PPhysics::CalcMissingP4(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index)
+TLorentzVector PPhysicsSam::CalcMissingP4(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index)
 {
     particle	= tree.Particle(particle_index);
     beam 		= TLorentzVector(0.,0.,GetTagger()->GetTaggedEnergy(tagger_index),GetTagger()->GetTaggedEnergy(tagger_index));
@@ -313,7 +313,7 @@ TLorentzVector PPhysics::CalcMissingP4(const GTreeParticle& tree, Int_t particle
     return missingp4;
 }
 
-void PPhysics::FillBeamAsymmetry(const GTreeParticle& tree, Int_t particle_index, GH1* gHist, Bool_t TaggerBinning, Double_t MM_min, Double_t MM_max)
+void PPhysicsSam::FillBeamAsymmetry(const GTreeParticle& tree, Int_t particle_index, GH1* gHist, Bool_t TaggerBinning, Double_t MM_min, Double_t MM_max)
 {
     for (Int_t i = 0; i < GetTagger()->GetNTagged(); i++)
     {
@@ -322,7 +322,7 @@ void PPhysics::FillBeamAsymmetry(const GTreeParticle& tree, Int_t particle_index
 
 }
 
-void PPhysics::FillBeamAsymmetry(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, GH1* gHist, Bool_t TaggerBinning, Double_t MM_min, Double_t MM_max)
+void PPhysicsSam::FillBeamAsymmetry(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, GH1* gHist, Bool_t TaggerBinning, Double_t MM_min, Double_t MM_max)
 {
     // Is tagger channel rejected by user?
     if(GetTagger()->GetTaggedChannel(tagger_index) < TC_cut_min) return;
@@ -340,7 +340,7 @@ void PPhysics::FillBeamAsymmetry(const GTreeParticle& tree, Int_t particle_index
 
 }
 
-void PPhysics::FillTime(const GTreeParticle& tree, GH1* gHist)
+void PPhysicsSam::FillTime(const GTreeParticle& tree, GH1* gHist)
 {
     for (Int_t i = 0; i < tree.GetNParticles(); i++)
     {
@@ -356,7 +356,7 @@ void PPhysics::FillTime(const GTreeParticle& tree, GH1* gHist)
     }
 }
 
-void PPhysics::FillTime(const GTreeParticle& tree, Int_t particle_index, GH1* gHist)
+void PPhysicsSam::FillTime(const GTreeParticle& tree, Int_t particle_index, GH1* gHist)
 {
     for (Int_t j = 0; j < GetTagger()->GetNTagged(); j++)
     {
@@ -369,7 +369,7 @@ void PPhysics::FillTime(const GTreeParticle& tree, Int_t particle_index, GH1* gH
     }
 }
 
-void PPhysics::FillTimeCut(const GTreeParticle& tree, GH1* gHist)
+void PPhysicsSam::FillTimeCut(const GTreeParticle& tree, GH1* gHist)
 {
     for (Int_t i = 0; i < tree.GetNParticles(); i++)
     {
@@ -385,7 +385,7 @@ void PPhysics::FillTimeCut(const GTreeParticle& tree, GH1* gHist)
     }
 }
 
-void PPhysics::FillTimeCut(const GTreeParticle& tree, Int_t particle_index, GH1* gHist)
+void PPhysicsSam::FillTimeCut(const GTreeParticle& tree, Int_t particle_index, GH1* gHist)
 {
     for (Int_t j = 0; j < GetTagger()->GetNTagged(); j++)
     {
@@ -398,7 +398,7 @@ void PPhysics::FillTimeCut(const GTreeParticle& tree, Int_t particle_index, GH1*
     }
 }
 
-void PPhysics::FillMass(const GTreeParticle& tree, GH1* gHist)
+void PPhysicsSam::FillMass(const GTreeParticle& tree, GH1* gHist)
 {
     for (Int_t i = 0; i < tree.GetNParticles(); i++)
     {
@@ -406,18 +406,18 @@ void PPhysics::FillMass(const GTreeParticle& tree, GH1* gHist)
     }
 }
 
-void PPhysics::FillMass(const GTreeParticle& tree, Int_t particle_index, GH1* gHist)
+void PPhysicsSam::FillMass(const GTreeParticle& tree, Int_t particle_index, GH1* gHist)
 {
     gHist->Fill(tree.GetMass(particle_index));
 }
 
-Bool_t 	PPhysics::Write()
+Bool_t 	PPhysicsSam::Write()
 {
     return kTRUE;
 }
 
 // Some common initialisation stuff
-Bool_t 	PPhysics::InitBackgroundCuts()
+Bool_t 	PPhysicsSam::InitBackgroundCuts()
 {
     // Set background cuts
     Double_t p1, p2, r1, r2;
@@ -461,7 +461,7 @@ Bool_t 	PPhysics::InitBackgroundCuts()
 
 }
 
-Bool_t 	PPhysics::InitTargetMass()
+Bool_t 	PPhysicsSam::InitTargetMass()
 {
     Double_t mass;
     string config = ReadConfig("Target-Mass");
@@ -485,7 +485,7 @@ Bool_t 	PPhysics::InitTargetMass()
 
 }
 
-Bool_t 	PPhysics::InitTaggerChannelCuts()
+Bool_t 	PPhysicsSam::InitTaggerChannelCuts()
 {
     Double_t tc1, tc2;
     string config = ReadConfig("Tagger-Channel-Cut");
@@ -516,7 +516,7 @@ Bool_t 	PPhysics::InitTaggerChannelCuts()
 
 }
 
-Bool_t 	PPhysics::InitTaggerScalers()
+Bool_t 	PPhysicsSam::InitTaggerScalers()
 {
     Int_t sc1, sc2;
     string config = ReadConfig("Tagger-Scalers");

@@ -116,8 +116,8 @@ Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, T
         // FillEnergy(particle_index, q, Eprompt, Erandom); // removed comment
 
         //FIX ME: not to sure if This is beam energy
-      //  if(GetTagger() -> GetTaggedEnergy(q) < 275) continue; // if the energy is less than 275, continue
-       // if(GetTagger() -> GetTaggedEnergy(q) < 3000) continue; // if the energy is greater than 300, continue WHAT HOW WHY
+        if(GetTagger() -> GetTaggedEnergy(q) < 275) continue; // if the energy is less than 275, continue
+        if(GetTagger() -> GetTaggedEnergy(q) > 300) continue; // if the energy is greater than 300, continue WHAT HOW WHY
        // std::cout << "We continued for particle index " << q << endl;
         FillThetaPair(tree, particle_index, q, Tprompt, Trandom); // removed comment, added tree
     }

@@ -15,10 +15,10 @@ private:
     // numbers made by Dylan
     Int_t	bin_val;
     Int_t	bin_val_e;
-    Double_t yeild_0;
-    Double_t yeild_0_e;
-    Double_t yeild_1;
-    Double_t yeild_1_e;
+    Double_t yield_0;
+    Double_t yield_0_e;
+    Double_t yield_1;
+    Double_t yield_1_e;
     Double_t asym;
     Double_t asym_e;
     Double_t err;

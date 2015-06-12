@@ -98,7 +98,7 @@ void	PPi0Sam::ProcessEvent()
                         // This function can be found in PPhysics, you can change the
                         // energy there.
 
-                    std::cout << "We found a helicity 1!" << endl;
+		  // std::cout << "We found a helicity 1!" << endl;
                     FillTheta(*GetNeutralPions(),i, Theta_1_prompt, Theta_1_random);
                 }
                 // do it all again for the other helicity.
@@ -119,8 +119,9 @@ void	PPi0Sam::ProcessScalerRead()
 Bool_t	PPi0Sam::Write()
 {
     // Write all GH1's and TObjects defined in this class
-    RandomSubtraction(Theta_1_prompt, Theta_1_random, Theta_1, 0.122); // works for now but should be moved
-    RandomSubtraction(Theta_0_prompt, Theta_0_random, Theta_0, 0.122);
+    RandomSubtraction(Theta_1_prompt, Theta_1_random, Theta_1, 0.0122); // works for now but should be moved
+    RandomSubtraction(Theta_0_prompt, Theta_0_random, Theta_0, 0.0122);
    // std::cout << PvR_ratio << endl;
+    std::cout << "Did this change work?" << endl;
     return GTreeManager::Write();
 }

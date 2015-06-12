@@ -20,6 +20,65 @@ Bool_t	PPhysicsSam::Init()
 void	PPhysicsSam::Reconstruct()
 {
 }
+// ----------------------------------------------------------------------------------------
+// My routines
+// ----------------------------------------------------------------------------------------
+// ADDED BY DYLAN, contains FillThetaPair
+Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, TH1* Tprompt, TH1* Trandom)
+{
+    for (Int_t q = 0; q < GetTagger() -> GetNTagged(); q++) // q goes from 0 to NTagged
+    {
+        if (GetTrigger() -> GetNErrors() != 0)
+        {
+            // FillEnergy(particle_index, q, Eprompt, Erandom); // removed comment
+
+            //FIX ME: not to sure if This is beam energy
+            if((GetTagger() -> GetTaggedEnergy(q) > 275) && (GetTagger() -> GetTaggedEnergy(q) < 300))
+            {
+            // std::cout << "We continued for particle index " << q << endl;
+            FillThetaPair(tree, particle_index, q, Tprompt, Trandom); // removed comment, added tree
+            }
+            return kTRUE;
+        }
+        else
+        {
+            return kFALSE;
+        }
+    }
+}
+
+// ADDED BY ME
+void PPhysicsSam::RandomSubtraction(TH1* Tprompt, TH1* Trandom, TH1* sub, Double_t ratio)
+{
+    sub->Add(Tprompt,1);
+    sub->Add(Trandom,-ratio);
+}
+
+// ADDED BY DYLAN
+Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index,TH1* Tprompt, TH1* Trandom)
+{
+    time = GetTagger()->GetTaggedTime(tagger_index) - tree.GetTime(particle_index);
+
+    Prompt  = GHistBGSub::IsPrompt(time);
+    Random =  GHistBGSub::IsRandom(time);
+
+    if ((!Prompt) && (!Random))
+    {
+        // std::cout << "Time cut improper for both prompt and random." << endl;
+        return kFALSE;
+    }
+    if (Prompt)
+    {
+        // std::cout << "Prompt worked." << endl;
+        Tprompt -> Fill(GetTracks() -> GetTheta(particle_index));
+    }
+    if (Random)
+    {
+        Trandom -> Fill(GetTracks() -> GetTheta(particle_index));
+        // std::cout << "Random worked." << endl;
+    }
+    return kTRUE;
+}
 
 // ----------------------------------------------------------------------------------------
 // TH1 routines
@@ -105,56 +164,6 @@ void PPhysicsSam::FillTime(const GTreeParticle& tree, TH1* Hist)
             Hist->Fill(time);
         }
     }
-}
-// ADDED BY DYLAN, contains FillThetaPair
-Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, TH1* Tprompt, TH1* Trandom)
-{
-    for (Int_t q = 0; q < GetTagger() -> GetNTagged(); q++) // q goes from 0 to NTagged
-    {
-        if (GetTrigger() -> GetNErrors() != 0) continue; // if there are no errors, continue
-
-        // FillEnergy(particle_index, q, Eprompt, Erandom); // removed comment
-
-        //FIX ME: not to sure if This is beam energy
-        if(GetTagger() -> GetTaggedEnergy(q) > 275) continue; // if the energy is less than 275, continue
-        if(GetTagger() -> GetTaggedEnergy(q) < 300) continue; // if the energy is greater than 300, continue WHAT HOW WHY
-       // std::cout << "We continued for particle index " << q << endl;
-        FillThetaPair(tree, particle_index, q, Tprompt, Trandom); // removed comment, added tree
-    }
-    return kTRUE;
-}
-
-// ADDED BY ME
-void PPhysicsSam::RandomSubtraction(TH1* Tprompt, TH1* Trandom, TH1* sub, Double_t ratio)
-{
-    sub->Add(Tprompt,1);
-    sub->Add(Trandom,-ratio);
-}
-
-// ADDED BY DYLAN
-Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index,TH1* Tprompt, TH1* Trandom)
-{
-    time = GetTagger()->GetTaggedTime(tagger_index) - tree.GetTime(particle_index);
-
-    Prompt  = GHistBGSub::IsPrompt(time);
-    Random =  GHistBGSub::IsRandom(time);
-
-    if ((!Prompt) && (!Random))
-    {
-        // std::cout << "Time cut improper for both prompt and random." << endl;
-        return kFALSE;
-    }
-    if (Prompt)
-    {
-        // std::cout << "Prompt worked." << endl;
-        Tprompt -> Fill(GetTracks() -> GetTheta(particle_index));
-    }
-    if (Random)
-    {
-        Trandom -> Fill(GetTracks() -> GetTheta(particle_index));
-        // std::cout << "Random worked." << endl;
-    }
-    return kTRUE;
 }
 
 void PPhysicsSam::FillTime(const GTreeParticle& tree, Int_t particle_index, TH1* Hist)

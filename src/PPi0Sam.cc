@@ -122,7 +122,6 @@ Bool_t	PPi0Sam::Write()
     RandomSubtraction(Theta_1_prompt, Theta_1_random, Theta_1, 0.0122); // works for now but should be moved
     RandomSubtraction(Theta_0_prompt, Theta_0_random, Theta_0, 0.0122);
    // std::cout << PvR_ratio << endl;
-    std::cout << "This is an attempt to push to github, then clone onto blaster." << endl;
-    std::cout << "Did this change work?" << endl;
+    std::cout << "First attempt to clone into blaster." << endl;
     return GTreeManager::Write();
 }

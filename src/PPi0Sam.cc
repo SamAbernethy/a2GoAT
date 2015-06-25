@@ -18,16 +18,16 @@ PPi0Sam::PPi0Sam()
     // added by Dylan
     Energy		 = new TH1D("Energy", "Photon_Energy", 350, 100, 450);
 
-    Theta_1              = new TH1D("Theta_1", "Theta_1", 18, 0, 180); // 18s were 7s
-    Theta_0              = new TH1D("Theta_0", "Theta_0", 18, 0, 180);
+    Theta_1              = new TH1D("Theta_1", "Theta_1", 9, 0, 180); // 9s were 18s were 7s
+    Theta_0              = new TH1D("Theta_0", "Theta_0", 9, 0, 180);
 
     Eng_1              = new TH1D("Energy_1", "Energy_1", 50, 100, 450);
     Eng_0              = new TH1D("Energy_0", "Energy_0", 50, 100, 450);
 
-    Theta_1_prompt              = new TH1D("Theta_1_prompt", "Theta_1_prompt", 18, 0, 180); // all these 18s were 7s
-    Theta_1_random              = new TH1D("Theta_1_random", "Theta_1_random", 18, 0, 180);
-    Theta_0_prompt              = new TH1D("Theta_0_prompt", "Theta_0_prompt", 18, 0, 180);
-    Theta_0_random              = new TH1D("Theta_0_random", "Theta_0_random", 18, 0, 180);
+    Theta_1_prompt              = new TH1D("Theta_1_prompt", "Theta_1_prompt", 9, 0, 180); // all these 9s were 18s were 7s
+    Theta_1_random              = new TH1D("Theta_1_random", "Theta_1_random", 9, 0, 180);
+    Theta_0_prompt              = new TH1D("Theta_0_prompt", "Theta_0_prompt", 9, 0, 180);
+    Theta_0_random              = new TH1D("Theta_0_random", "Theta_0_random", 9, 0, 180);
 
     TaggerAccScal = new TH1D("TaggerAccScal","TaggerAccScal",352,0,352);
 }

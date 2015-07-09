@@ -60,18 +60,15 @@ Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_inde
 
     if ((!Prompt) && (!Random))
     {
-        // std::cout << "Time cut improper for both prompt and random." << endl;
         return kFALSE;
     }
     if (Prompt)
     {
-        // std::cout << "Prompt worked." << endl;
         Tprompt -> Fill(GetTracks() -> GetTheta(particle_index));
     }
     if (Random)
     {
         Trandom -> Fill(GetTracks() -> GetTheta(particle_index));
-        // std::cout << "Random worked." << endl;
     }
     return kTRUE;
 }
@@ -223,7 +220,6 @@ void PPhysicsSam::FillBeamAsymmetry(const GTreeParticle& tree, Int_t particle_in
     {
         FillBeamAsymmetry(tree, particle_index, i, Hprompt, Hrandom, MM_min, MM_max);
     }
-
 }
 
 void PPhysicsSam::FillBeamAsymmetry(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, TH1* Hprompt, TH1* Hrandom, Double_t MM_min, Double_t MM_max)

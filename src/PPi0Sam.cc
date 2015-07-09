@@ -119,9 +119,7 @@ void	PPi0Sam::ProcessScalerRead()
 Bool_t	PPi0Sam::Write()
 {
     // Write all GH1's and TObjects defined in this class
-    RandomSubtraction(Theta_1_prompt, Theta_1_random, Theta_1, 0.01224489795); // works for now but should be moved
-    RandomSubtraction(Theta_0_prompt, Theta_0_random, Theta_0, 0.01224489795);
-   // std::cout << PvR_ratio << endl;
-    std::cout << "First attempt to clone into blaster." << endl;
+    RandomSubtraction(Theta_1_prompt, Theta_1_random, Theta_1, 12/980); // works for now but should be moved
+    RandomSubtraction(Theta_0_prompt, Theta_0_random, Theta_0, 12/980);
     return GTreeManager::Write();
 }

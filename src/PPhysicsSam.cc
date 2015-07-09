@@ -58,16 +58,13 @@ Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_inde
     Prompt  = GHistBGSub::IsPrompt(time);
     Random =  GHistBGSub::IsRandom(time);
 
-    if ((!Prompt) && (!Random))
-    {
+    if ((!Prompt) && (!Random)) {
         return kFALSE;
     }
-    if (Prompt)
-    {
+    if (Prompt) {
         Tprompt -> Fill(GetTracks() -> GetTheta(particle_index));
     }
-    if (Random)
-    {
+    if (Random) {
         Trandom -> Fill(GetTracks() -> GetTheta(particle_index));
     }
     return kTRUE;

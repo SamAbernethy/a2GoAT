@@ -64,11 +64,11 @@ Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_inde
     }
     if (Prompt)
     {
-        Tprompt -> Fill(GetNeutralPions() -> GetTheta(particle_index));
+        Tprompt -> Fill(tree.GetTheta(particle_index));
     }
     if (Random)
     {
-        Trandom -> Fill(GetNeutralPions() -> GetTheta(particle_index));
+        Trandom -> Fill(tree.GetTheta(particle_index));
     }
     return kTRUE;
 }

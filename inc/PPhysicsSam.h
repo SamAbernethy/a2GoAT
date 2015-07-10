@@ -58,8 +58,8 @@ public:
     void RandomSubtraction(TH1* Tprompt, TH1* Trandom, TH1* sub, Double_t ratio);
     void RandomSubtraction(TH1* Tprompt, TH1* Trandom, TH1* sub) {RandomSubtraction(Tprompt, Trandom, sub, PvR_ratio);}
     // things added by Dylan are FillTheta, FillThetaPair
-        Bool_t	FillTheta(const GTreeParticle& tree,Int_t particle_index, TH1* Tprompt, TH1* Trandom);
-        Bool_t  FillThetaPair(const GTreeParticle& tree,Int_t particle_index, Int_t tagger_index,TH1* Tprompt, TH1* Trandom);
+        Bool_t	FillTheta(const GTreeMeson tree,Int_t particle_index, TH1* Tprompt, TH1* Trandom);
+        Bool_t  FillThetaPair(const GTreeMeson tree,Int_t particle_index, Int_t tagger_index,TH1* Tprompt, TH1* Trandom);
     void	FillMissingMass(const GTreeParticle& tree, GH1* gHist, Bool_t TaggerBinning = kFALSE);
     void	FillMissingMass(const GTreeParticle& tree, Int_t particle_index, GH1* gHist, Bool_t TaggerBinning = kFALSE);
     void 	FillMissingMass(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, GH1* gHist, Bool_t TaggerBinning = kFALSE);

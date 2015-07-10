@@ -24,7 +24,7 @@ void	PPhysicsSam::Reconstruct()
 // My routines
 // ----------------------------------------------------------------------------------------
 // contains FillThetaPair
-Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, TH1* Tprompt, TH1* Trandom)
+Bool_t	PPhysicsSam::FillTheta(const GTreeMeson tree, Int_t particle_index, TH1* Tprompt, TH1* Trandom)
 {
     for (Int_t q = 0; q < GetTagger() -> GetNTagged(); q++) // q goes from 0 to NTagged
     {

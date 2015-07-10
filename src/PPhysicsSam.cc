@@ -24,7 +24,7 @@ void	PPhysicsSam::Reconstruct()
 // My routines
 // ----------------------------------------------------------------------------------------
 // contains FillThetaPair
-Bool_t	PPhysicsSam::FillTheta(const GTreeMeson tree, Int_t particle_index, TH1* Tprompt, TH1* Trandom)
+Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, TH1* Tprompt, TH1* Trandom)
 {
     for (Int_t q = 0; q < GetTagger() -> GetNTagged(); q++) // q goes from 0 to NTagged
     {
@@ -51,7 +51,7 @@ void PPhysicsSam::RandomSubtraction(TH1* Tprompt, TH1* Trandom, TH1* sub, Double
 }
 
 // MEAT AND GRAVY
-Bool_t PPhysicsSam::FillThetaPair(const GTreeMeson tree, Int_t particle_index, Int_t tagger_index,TH1* Tprompt, TH1* Trandom)
+Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index,TH1* Tprompt, TH1* Trandom)
 {
     time = GetTagger()->GetTaggedTime(tagger_index) - tree.GetTime(particle_index);
 

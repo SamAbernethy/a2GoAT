@@ -32,11 +32,9 @@ Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, T
         {
             // FillEnergy(particle_index, q, Eprompt, Erandom); // removed comment
 
-            //FIX ME: not to sure if This is beam energy
             if((GetTagger() -> GetTaggedEnergy(q) > 275) && (GetTagger() -> GetTaggedEnergy(q) < 300))
             {
-            // std::cout << "We continued for particle index " << q << endl;
-            FillThetaPair(tree, particle_index, q, Tprompt, Trandom); // removed comment, added tree
+                FillThetaPair(tree, particle_index, q, Tprompt, Trandom); // removed comment, added tree
             }
         }
     }
@@ -58,10 +56,10 @@ Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_inde
     Prompt  = GHistBGSub::IsPrompt(time);
     Random =  GHistBGSub::IsRandom(time);
 
-    if ((!Prompt) && (!Random))
+    /*if ((!Prompt) && (!Random))
     {
         return kFALSE;
-    }
+    } */
     if (Prompt)
     {
         Tprompt -> Fill(tree.GetTheta(particle_index));

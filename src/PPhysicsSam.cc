@@ -23,7 +23,8 @@ void	PPhysicsSam::Reconstruct()
 // ----------------------------------------------------------------------------------------
 // My routines
 // ----------------------------------------------------------------------------------------
-// ADDED BY DYLAN, contains FillThetaPair
+
+// Contains FillThetaPair
 Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, TH1* Tprompt, TH1* Trandom)
 {
     for (Int_t q = 0; q < GetTagger() -> GetNTagged(); q++) // q goes from 0 to NTagged
@@ -41,31 +42,24 @@ Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, T
     return kTRUE;
 }
 
-// ADDED BY ME
 void PPhysicsSam::RandomSubtraction(TH1* Tprompt, TH1* Trandom, TH1* sub, Double_t ratio)
 {
     sub->Add(Tprompt,1);
     sub->Add(Trandom,-ratio);
 }
 
-// ADDED BY DYLAN
 Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index,TH1* Tprompt, TH1* Trandom)
 {
     time = GetTagger()->GetTaggedTime(tagger_index) - tree.GetTime(particle_index);
-
-    Prompt  = GHistBGSub::IsPrompt(time);
-    Random =  GHistBGSub::IsRandom(time);
 
     /*if ((!Prompt) && (!Random))
     {
         return kFALSE;
     } */
-    if (Prompt)
-    {
+    if (GHistBGSub::IsPrompt(time)) {
         Tprompt -> Fill(tree.GetTheta(particle_index));
     }
-    if (Random)
-    {
+    if (GHistBGSub::IsRandom(time)) {
         Trandom -> Fill(tree.GetTheta(particle_index));
     }
     return kTRUE;

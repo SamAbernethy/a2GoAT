@@ -91,16 +91,16 @@ void	PPi0Sam::ProcessEvent()
         // fill invariant mass, this pi0
                 FillMass(*GetNeutralPions(),i,IM_2g);
 
-  // SAM!!!     This is the meat and gravies, here's where we fill the theta histograms for a given
-  //            energy cut and for different helicities.
+        // This is the meat and gravies, here's where we fill the theta histograms for a given
+        // energy cut and for different helicities.
                 if (GetTrigger() -> GetHelicity() == kTRUE) // helicity 1
                 {
                     // This function can be found in PPhysicsSam, you can change the energy there.
-                    FillTheta(*GetNeutralPions(),i, Theta_1_prompt, Theta_1_random);
+                    FillTheta(*GetNeutralPions(), i, Theta_1_prompt, Theta_1_random);
                 }
                 else if(GetTrigger() -> GetHelicity() == kFALSE) // helicity 0
                 {
-                    FillTheta(*GetNeutralPions(),i, Theta_0_prompt, Theta_0_random);
+                    FillTheta(*GetNeutralPions(), i, Theta_0_prompt, Theta_0_random);
                 }
         }
     }

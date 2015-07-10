@@ -51,7 +51,7 @@ void PPhysicsSam::RandomSubtraction(TH1* Tprompt, TH1* Trandom, TH1* sub, Double
 }
 
 // MEAT AND GRAVY
-Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index,TH1* Tprompt, TH1* Trandom)
+Bool_t PPhysicsSam::FillThetaPair(const GTreeMeson tree, Int_t particle_index, Int_t tagger_index,TH1* Tprompt, TH1* Trandom)
 {
     time = GetTagger()->GetTaggedTime(tagger_index) - tree.GetTime(particle_index);
 
@@ -62,10 +62,10 @@ Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_inde
         return kFALSE;
     }
     if (Prompt) {
-        Tprompt -> Fill(GetNeutralPions() -> GetTheta(particle_index));
+        Tprompt -> Fill(tree.GetTheta(particle_index));
     }
     if (Random) {
-        Trandom -> Fill(GetNeutralPions() -> GetTheta(particle_index));
+        Trandom -> Fill(tree.GetTheta(particle_index));
     }
     return kTRUE;
 }

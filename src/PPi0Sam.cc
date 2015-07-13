@@ -25,12 +25,12 @@ PPi0Sam::PPi0Sam()
     Theta_0_prompt       = new TH1D("Theta_0_prompt", "Theta_0_prompt", 9, 0, 180);
     Theta_0_random       = new TH1D("Theta_0_random", "Theta_0_random", 9, 0, 180);
 
-    Eng_1              = new TH1D("Energy_1", "Energy_1", 50, 100, 450);
-    Eng_0              = new TH1D("Energy_0", "Energy_0", 50, 100, 450);
-    Eng_1_prompt       = new TH1D("Eng_1_prompt", "Eng_1_prompt", 9, 100, 450);
-    Eng_1_random       = new TH1D("Eng_1_random", "Eng_1_random", 9, 100, 450);
-    Eng_0_prompt       = new TH1D("Eng_0_prompt", "Eng_0_prompt", 9, 100, 450);
-    Eng_0_random       = new TH1D("Eng_0_random", "Eng_0_random", 9, 100, 450);
+    Eng_1              = new TH1D("Eng_1", "Eng_1", 50, 100, 450);
+    Eng_0              = new TH1D("Eng_0", "Eng_0", 50, 100, 450);
+    Eng_1_prompt       = new TH1D("Eng_1_prompt", "Eng_1_prompt", 50, 100, 450);
+    Eng_1_random       = new TH1D("Eng_1_random", "Eng_1_random", 50, 100, 450);
+    Eng_0_prompt       = new TH1D("Eng_0_prompt", "Eng_0_prompt", 50, 100, 450);
+    Eng_0_random       = new TH1D("Eng_0_random", "Eng_0_random", 50, 100, 450);
 
     MM_pi0_n_2g_h1     = new TH1D("MM_pi0_n_2g_h1", "MM_pi0_n_2g_h1", 1500, 0, 1500);
     MM_pi0_n_2g_h0     = new TH1D("MM_pi0_n_2g_h0", "MM_pi0_n_2g_h0", 1500, 0, 1500);

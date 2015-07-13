@@ -15,19 +15,29 @@ PPi0Sam::PPi0Sam()
     MM		= new GH1("MM", 	"MM", 	 	400,   800, 1200);
     MM_2g	= new GH1("MM_2g", 	"MM_2g", 	400,   800, 1200);
 
-    // added by Dylan
+    // added by me
     Energy		 = new TH1D("Energy", "Photon_Energy", 350, 100, 450);
 
     Theta_1              = new TH1D("Theta_1", "Theta_1", 9, 0, 180); // 9s were 18s were 7s
     Theta_0              = new TH1D("Theta_0", "Theta_0", 9, 0, 180);
+    Theta_1_prompt       = new TH1D("Theta_1_prompt", "Theta_1_prompt", 9, 0, 180); // all these 9s were 18s were 7s
+    Theta_1_random       = new TH1D("Theta_1_random", "Theta_1_random", 9, 0, 180);
+    Theta_0_prompt       = new TH1D("Theta_0_prompt", "Theta_0_prompt", 9, 0, 180);
+    Theta_0_random       = new TH1D("Theta_0_random", "Theta_0_random", 9, 0, 180);
 
     Eng_1              = new TH1D("Energy_1", "Energy_1", 50, 100, 450);
     Eng_0              = new TH1D("Energy_0", "Energy_0", 50, 100, 450);
+    Eng_1_prompt       = new TH1D("Eng_1_prompt", "Eng_1_prompt", 9, 100, 450);
+    Eng_1_random       = new TH1D("Eng_1_random", "Eng_1_random", 9, 100, 450);
+    Eng_0_prompt       = new TH1D("Eng_0_prompt", "Eng_0_prompt", 9, 100, 450);
+    Eng_0_random       = new TH1D("Eng_0_random", "Eng_0_random", 9, 100, 450);
 
-    Theta_1_prompt              = new TH1D("Theta_1_prompt", "Theta_1_prompt", 9, 0, 180); // all these 9s were 18s were 7s
-    Theta_1_random              = new TH1D("Theta_1_random", "Theta_1_random", 9, 0, 180);
-    Theta_0_prompt              = new TH1D("Theta_0_prompt", "Theta_0_prompt", 9, 0, 180);
-    Theta_0_random              = new TH1D("Theta_0_random", "Theta_0_random", 9, 0, 180);
+    MM_pi0_n_2g_h1     = new TH1D("MM_pi0_n_2g_h1", "MM_pi0_n_2g_h1", 1500, 0, 1500);
+    MM_pi0_n_2g_h0     = new TH1D("MM_pi0_n_2g_h0", "MM_pi0_n_2g_h0", 1500, 0, 1500);
+    MM_prompt_pi0_n_2g_h0 = new TH1D("MM_prompt_pi0_n_2g_h0", "MM_prompt_pi0_n_2g_h0", 1500, 0, 1500);
+    MM_prompt_pi0_n_2g_h1 = new TH1D("MM_prompt_pi0_n_2g_h1", "MM_prompt_pi0_n_2g_h1", 1500, 0, 1500);
+    MM_random_pi0_n_2g_h0 = new TH1D("MM_random_pi0_n_2g_h0", "MM_random_pi0_n_2g_h0", 1500, 0, 1500);
+    MM_random_pi0_n_2g_h1 = new TH1D("MM_random_pi0_n_2g_h1", "MM_random_pi0_n_2g_h1", 1500, 0, 1500);
 
     TaggerAccScal = new TH1D("TaggerAccScal","TaggerAccScal",352,0,352);
 }

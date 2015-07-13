@@ -95,12 +95,14 @@ void	PPi0Sam::ProcessEvent()
         // energy cut and for different helicities.
                 if (GetTrigger() -> GetHelicity() == kTRUE) // helicity 1
                 {
-                    // This function can be found in PPhysicsSam, you can change the energy there.
-                    FillTheta(*GetNeutralPions(), i, Theta_1_prompt, Theta_1_random);
+                    // These functions can be found in PPhysicsSam, you can change the energy there.
+                    FillTheta(*GetNeutralPions(), i, Theta_1_prompt, Theta_1_random, Eng_1_prompt, Eng_1_random);
+                    FillMissingMass(*GetNeutralPions(), i, MM_prompt_pi0_n_2g_h1, MM_random_pi0_n_2g_h1);
                 }
                 else if(GetTrigger() -> GetHelicity() == kFALSE) // helicity 0
                 {
-                    FillTheta(*GetNeutralPions(), i, Theta_0_prompt, Theta_0_random);
+                    FillTheta(*GetNeutralPions(), i, Theta_0_prompt, Theta_0_random, Eng_0_prompt, Eng_0_random);
+                    FillMissingMass(*GetNeutralPions(), i, MM_prompt_pi0_n_2g_h0, MM_random_pi0_n_2g_h0);
                 }
         }
     }
@@ -117,5 +119,9 @@ Bool_t	PPi0Sam::Write()
     // Write all GH1's and TObjects defined in this class
     RandomSubtraction(Theta_1_prompt, Theta_1_random, Theta_1, 4.0/84.0); // works for now but should be moved
     RandomSubtraction(Theta_0_prompt, Theta_0_random, Theta_0, 4.0/84.0);
+    RandomSubtraction(MM_prompt_pi0_n_2g_h0, MM_random_pi0_n_2g_h0, MM_pi0_n_2g_h0, 4.0/84.0);
+    RandomSubtraction(MM_prompt_pi0_n_2g_h1, MM_random_pi0_n_2g_h1, MM_pi0_n_2g_h1, 4.0/84.0);
+    RandomSubtraction(Eng_0_prompt, Eng_0_random, Eng_0, 4.0/84.0);
+    RandomSubtraction(Eng_1_prompt, Eng_1_random, Eng_1, 4.0/84.0);
     return GTreeManager::Write();
 }

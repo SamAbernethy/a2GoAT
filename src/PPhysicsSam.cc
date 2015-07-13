@@ -25,13 +25,13 @@ void	PPhysicsSam::Reconstruct()
 // ----------------------------------------------------------------------------------------
 
 // Contains FillThetaPair
-Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, TH1* Tprompt, TH1* Trandom)
+Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, TH1* Tprompt, TH1* Trandom, TH1* Eprompt, TH1* Erandom)
 {
     for (Int_t q = 0; q < GetTagger() -> GetNTagged(); q++) // q goes from 0 to NTagged
     {
         if (GetTrigger() -> GetNErrors() != 0)
         {
-            // FillEnergy(particle_index, q, Eprompt, Erandom); // removed comment
+            FillEnergy(particle_index, q, Eprompt, Erandom); // removed comment
 
             if((GetTagger() -> GetTaggedEnergy(q) > 275) && (GetTagger() -> GetTaggedEnergy(q) < 300))
             {
@@ -52,15 +52,25 @@ Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_inde
 {
     time = GetTagger()->GetTaggedTime(tagger_index) - tree.GetTime(particle_index);
 
-    /*if ((!Prompt) && (!Random))
-    {
-        return kFALSE;
-    } */
     if (GHistBGSub::IsPrompt(time)) {
         Tprompt -> Fill(tree.GetTheta(particle_index));
     }
     if (GHistBGSub::IsRandom(time)) {
         Trandom -> Fill(tree.GetTheta(particle_index));
+    }
+    return kTRUE;
+}
+
+Bool_t PPhysicsSam::FillEnergy(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, TH1* Eprompt, TH1* Erandom)
+{
+    if (tree.GetTheta(particle_index) < 87) { return; }
+    if (tree.GetTheta(particle_index) > 93) { return; }
+    time = GetTagger()->GetTaggedTime(tagger_index) - tree.GetTime(particle_index);
+    if (GHistBGSub::IsPrompt(time)) {
+        Eprompt -> Fill(*GetTagger() -> GetTaggedEnergy(tagger_index)); // FIX THIS
+    }
+    if (GHistBGSub::IsRandom(time)) {
+        Erandom -> Fill(*GetTagger() -> GetTaggedEnergy(tagger_index); // FIX THIS
     }
     return kTRUE;
 }

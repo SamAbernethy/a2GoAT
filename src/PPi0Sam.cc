@@ -103,23 +103,17 @@ void	PPi0Sam::ProcessEvent()
 
         // This is the meat and gravies, here's where we fill the theta histograms for a given energy cut and for different helicities.
                 // when in doubt, cout it out time:
-                Int_t helicity1s = 0;
-                Int_t helicity0s = 0;
                 if (GetTrigger() -> GetHelicity() == kTRUE) // helicity 1
                 {
-                    helicity1s++;
                     // These functions can be found in PPhysicsSam, you can change the energy cut there.
                     FillTheta(*GetNeutralPions(), i, Theta_1_prompt, Theta_1_random, Eng_1_prompt, Eng_1_random);
                     FillMissingMass(*GetNeutralPions(), i, MM_prompt_pi0_n_2g_h1, MM_random_pi0_n_2g_h1);
                 }
                 else if(GetTrigger() -> GetHelicity() == kFALSE) // helicity 0
                 {
-                    helicity0s++;
                     FillTheta(*GetNeutralPions(), i, Theta_0_prompt, Theta_0_random, Eng_0_prompt, Eng_0_random);
                     FillMissingMass(*GetNeutralPions(), i, MM_prompt_pi0_n_2g_h0, MM_random_pi0_n_2g_h0);
                 }
-                std::cout << "Number of helicity 1s for pion # " << i << "was: " << helicity1s << endl;
-                std::cout << "Number of helicity 0s for pion # " << i << "was: " << helicity0s << endl;
         }
     }
 }

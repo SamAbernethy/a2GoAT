@@ -67,10 +67,10 @@ Bool_t PPhysicsSam::FillEnergy(const GTreeParticle& tree, Int_t particle_index, 
     if (tree.GetTheta(particle_index) > 93) { return kFALSE; }
     time = GetTagger()->GetTaggedTime(tagger_index) - tree.GetTime(particle_index);
     if (GHistBGSub::IsPrompt(time)) {
-        Eprompt -> Fill(tree.GetClusterEnergy(tagger_index));
+        Eprompt -> Fill(GetTagger() -> GetTaggedEnergy(tagger_index)); // INSTEAD OF GETCLUSTERENERGY WHAT SHOULD IT BE?
     }
     if (GHistBGSub::IsRandom(time)) {
-        Erandom -> Fill(tree.GetClusterEnergy(tagger_index));
+        Erandom -> Fill(GetTagger() -> GetTaggedEnergy(tagger_index)); // SAME AS ABOVE
     }
     return kTRUE;
 }

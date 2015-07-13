@@ -33,7 +33,7 @@ Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, T
         {
             FillEnergy(tree, particle_index, q, Eprompt, Erandom); // removed comment
 
-            if(/*(GetTagger() -> GetTaggedEnergy(q) > 275) &&*/ (GetTagger() -> GetTaggedEnergy(q) < 300))
+            if((GetTagger() -> GetTaggedEnergy(q) > 275) && (GetTagger() -> GetTaggedEnergy(q) < 300))
             {
                 FillThetaPair(tree, particle_index, q, Tprompt, Trandom); // removed comment, added tree
             }
@@ -63,14 +63,15 @@ Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_inde
 
 Bool_t PPhysicsSam::FillEnergy(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, TH1* Eprompt, TH1* Erandom)
 {
-    if (tree.GetTheta(particle_index) < 87) { return kFALSE; }
+    if (tree.GetTheta(particle_index) < 87) { return kFALSE; } // 87 and 93 chosen by dylan, can be changed
     if (tree.GetTheta(particle_index) > 93) { return kFALSE; }
-    time = GetTagger()->GetTaggedTime(tagger_index) - tree.GetTime(particle_index);
+    time = GetTagger() -> GetTaggedTime(tagger_index) - tree.GetTime(particle_index);
+
     if (GHistBGSub::IsPrompt(time)) {
-        Eprompt -> Fill(GetTagger() -> GetTaggedEnergy(tagger_index)); // INSTEAD OF GETCLUSTERENERGY WHAT SHOULD IT BE?
+        Eprompt -> Fill(GetTagger() -> GetTaggedEnergy(tagger_index));
     }
     if (GHistBGSub::IsRandom(time)) {
-        Erandom -> Fill(GetTagger() -> GetTaggedEnergy(tagger_index)); // SAME AS ABOVE
+        Erandom -> Fill(GetTagger() -> GetTaggedEnergy(tagger_index));
     }
     return kTRUE;
 }

@@ -63,8 +63,8 @@ Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_inde
 
 Bool_t PPhysicsSam::FillEnergy(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, TH1* Eprompt, TH1* Erandom)
 {
-    if (tree.GetTheta(particle_index) < 87) { return; }
-    if (tree.GetTheta(particle_index) > 93) { return; }
+    if (tree.GetTheta(particle_index) < 87) { return kFALSE; }
+    if (tree.GetTheta(particle_index) > 93) { return kFALSE; }
     time = GetTagger()->GetTaggedTime(tagger_index) - tree.GetTime(particle_index);
     if (GHistBGSub::IsPrompt(time)) {
         Eprompt -> Fill(tree.GetTaggedEnergy(tagger_index));

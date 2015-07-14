@@ -32,11 +32,11 @@ Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, T
         if (GetTrigger() -> GetNErrors() != 0)
         {
             FillEnergy(tree, particle_index, q, Eprompt, Erandom); // removed comment
-
-            if((GetTagger() -> GetTaggedEnergy(q) > 275) && (GetTagger() -> GetTaggedEnergy(q) < 300))
-            {
+            // no energy cut
+            // if((GetTagger() -> GetTaggedEnergy(q) > 275) && (GetTagger() -> GetTaggedEnergy(q) < 300))
+            // {
                 FillThetaPair(tree, particle_index, q, Tprompt, Trandom); // removed comment, added tree
-            }
+            // }
         }
     }
     return kTRUE;

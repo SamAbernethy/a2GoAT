@@ -25,18 +25,31 @@ void	PPhysicsSam::Reconstruct()
 // ----------------------------------------------------------------------------------------
 
 // Contains FillThetaPair
-Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, TH1* Tprompt, TH1* Trandom, TH1* Eprompt, TH1* Erandom)
+Bool_t	PPhysicsSam::FillTheta(const GTreeParticle& tree, Int_t particle_index, TH1* Tprompt, TH1* Trandom)
 {
     for (Int_t q = 0; q < GetTagger() -> GetNTagged(); q++) // q goes from 0 to NTagged
     {
         if (GetTrigger() -> GetNErrors() != 0)
         {
-            FillEnergy(tree, particle_index, q, Eprompt, Erandom); // removed comment
-            // no energy cut
-            // if((GetTagger() -> GetTaggedEnergy(q) > 275) && (GetTagger() -> GetTaggedEnergy(q) < 300))
-            // {
-                FillThetaPair(tree, particle_index, q, Tprompt, Trandom); // removed comment, added tree
-            // }
+            if((GetTagger() -> GetTaggedEnergy(q) > 275) && (GetTagger() -> GetTaggedEnergy(q) < 300))
+            {
+                FillThetaPair(tree, particle_index, q, Tprompt, Trandom);
+            }
+        }
+    }
+    return kTRUE;
+}
+
+Bool_t PPhysicsSam::FillEnergy(const GTreeParticle& tree, Int_t particle_index, TH1* Eprompt, TH1* Erandom)
+{
+    for (Int_t r = 0; r < GetTagger() -> GetNTagged(); r++)
+    {
+        if (GetTrigger() -> GetNErrors() != 0)
+        {
+            if ((tree.GetTheta(particle_index) > 87) && (tree.GetTheta(particle_index) < 93))
+            {
+                FillEnergyPair(tree, particle_index, r, Eprompt, Erandom);
+            }
         }
     }
     return kTRUE;
@@ -61,10 +74,8 @@ Bool_t PPhysicsSam::FillThetaPair(const GTreeParticle& tree, Int_t particle_inde
     return kTRUE;
 }
 
-Bool_t PPhysicsSam::FillEnergy(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, TH1* Eprompt, TH1* Erandom)
+Bool_t PPhysicsSam::FillEnergyPair(const GTreeParticle& tree, Int_t particle_index, Int_t tagger_index, TH1* Eprompt, TH1* Erandom)
 {
-    if (tree.GetTheta(particle_index) < 87) { return kFALSE; } // 87 and 93 chosen by dylan, can be changed
-    if (tree.GetTheta(particle_index) > 93) { return kFALSE; }
     time = GetTagger() -> GetTaggedTime(tagger_index) - tree.GetTime(particle_index);
 
     if (GHistBGSub::IsPrompt(time)) {

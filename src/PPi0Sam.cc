@@ -107,12 +107,14 @@ void	PPi0Sam::ProcessEvent()
                 if (GetTrigger() -> GetHelicity() == kTRUE) // helicity 1
                 {
                     // These functions can be found in PPhysicsSam, you can change the energy cut there.
-                    FillTheta(*GetNeutralPions(), i, Theta_1_prompt, Theta_1_random, Eng_1_prompt, Eng_1_random);
+                    FillTheta(*GetNeutralPions(), i, Theta_1_prompt, Theta_1_random);
+                    FillEnergy(*GetNeutralPions(), i, Eng_1_prompt, Eng_1_random);
                     FillMissingMass(*GetNeutralPions(), i, MM_prompt_pi0_n_2g_h1, MM_random_pi0_n_2g_h1);
                 }
                 else if(GetTrigger() -> GetHelicity() == kFALSE) // helicity 0
                 {
-                    FillTheta(*GetNeutralPions(), i, Theta_0_prompt, Theta_0_random, Eng_0_prompt, Eng_0_random);
+                    FillTheta(*GetNeutralPions(), i, Theta_0_prompt, Theta_0_random);
+                    FillEnergy(*GetNeutralPions(), i, Eng_0_prompt, Eng_0_random);
                     FillMissingMass(*GetNeutralPions(), i, MM_prompt_pi0_n_2g_h0, MM_random_pi0_n_2g_h0);
                 }
         }

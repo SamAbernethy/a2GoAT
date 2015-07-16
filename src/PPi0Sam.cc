@@ -75,6 +75,7 @@ Bool_t	PPi0Sam::Start()
 
 void	PPi0Sam::ProcessEvent()
 {
+    if (GetTrigger() -> GetNErrors() != 0) { return; }
     // fill time diff (tagger - pi0), all pi0
     FillTime(*GetNeutralPions(),time);
     FillTimeCut(*GetNeutralPions(),time_cut);

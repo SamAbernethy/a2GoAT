@@ -131,11 +131,11 @@ void	PPi0Sam::ProcessScalerRead()
 Bool_t	PPi0Sam::Write()
 {
     // Write all GH1's and TObjects defined in this class
-    RandomSubtraction(Theta_1_prompt, Theta_1_random, Theta_1, 4.0/84.0); // works for now but should be moved
-    RandomSubtraction(Theta_0_prompt, Theta_0_random, Theta_0, 4.0/84.0);
-    RandomSubtraction(MM_prompt_pi0_n_2g_h0, MM_random_pi0_n_2g_h0, MM_pi0_n_2g_h0, 4.0/84.0);
-    RandomSubtraction(MM_prompt_pi0_n_2g_h1, MM_random_pi0_n_2g_h1, MM_pi0_n_2g_h1, 4.0/84.0);
-    RandomSubtraction(Eng_0_prompt, Eng_0_random, Eng_0, 4.0/84.0);
-    RandomSubtraction(Eng_1_prompt, Eng_1_random, Eng_1, 4.0/84.0);
+    RandomSubtraction(Theta_1_prompt, Theta_1_random, Theta_1, 2.0/86.0); // works for now but should be moved
+    RandomSubtraction(Theta_0_prompt, Theta_0_random, Theta_0, 2.0/86.0);
+    RandomSubtraction(MM_prompt_pi0_n_2g_h0, MM_random_pi0_n_2g_h0, MM_pi0_n_2g_h0, 2.0/86.0);
+    RandomSubtraction(MM_prompt_pi0_n_2g_h1, MM_random_pi0_n_2g_h1, MM_pi0_n_2g_h1, 2.0/86.0);
+    RandomSubtraction(Eng_0_prompt, Eng_0_random, Eng_0, 2.0/86.0);
+    RandomSubtraction(Eng_1_prompt, Eng_1_random, Eng_1, 2.0/86.0);
     return GTreeManager::Write();
 }
